@@ -15,7 +15,7 @@ class SchemaGenerator {
     static async generateFromMetadata(options) {
         const schema = this.generateFromMetadataSync(options);
         if (!options.skipCheck) {
-            const { errors } = await graphql_1.graphql({ schema: schema, source: graphql_1.getIntrospectionQuery() });
+            const { errors } = await graphql_1.graphql({ schema, source: graphql_1.getIntrospectionQuery() });
             if (errors) {
                 throw new errors_1.GeneratingSchemaError(errors);
             }
@@ -569,7 +569,8 @@ class SchemaGenerator {
             if (!resolvedType || typeof resolvedType === "string") {
                 return resolvedType || undefined;
             }
-            return ((_a = possibleObjectTypesInfo.find(objectType => objectType.target === resolvedType)) === null || _a === void 0 ? void 0 : _a.type.name) || undefined;
+            return (((_a = possibleObjectTypesInfo.find(objectType => objectType.target === resolvedType)) === null || _a === void 0 ? void 0 : _a.type.name) ||
+                undefined);
         };
     }
     static filterHandlersByResolvers(handlers, resolvers) {
